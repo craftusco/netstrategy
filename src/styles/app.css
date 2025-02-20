@@ -19,6 +19,15 @@ html.lenis {
   } 
 
 /* Timeline */
+.timeline-splide{
+  .splide__slide{
+    opacity: 0.5;
+  }
+  .splide__slide.is-active{
+    opacity: 1;
+    border: none !important;
+  }
+}
 /* #progress-area{
   position: absolute;
   top: 50%;

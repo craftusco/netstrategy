@@ -54,13 +54,14 @@ const Timeline = ({ data }) => {
 
 			<Box position="relative">
 			<Splide
+        className='timeline-splide'
 				ref={splideRef}
 				options={{
 					type: 'loop',
 					loop: true,
+          isNavigation: true,
           pauseOnHover: true,
           slideFocus: true,
-          wheel: true,
           perPage: 3.5,
 					rewind: true,
 					autoplay: 'true',
