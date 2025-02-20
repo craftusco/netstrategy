@@ -19,8 +19,16 @@
 
 @font-face {
   font-family: "NeueMontreal-Medium";
+  font-weight: 500;
   src: url("../../fonts/NeueMontreal-Medium.otf") format("opentype");
   font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueMontreal-Bold";
+  src: url("../../fonts/NeueMontreal-Medium.otf") format("opentype");
+  font-display: swap;
+  font-weight: bold;
 }
 
 @font-face {

@@ -1,6 +1,7 @@
 import Theme from "../styles/theme";
 import GlobalStyle from "../styles/globalStyles";
 import "../styles/fonts.css";
+import "../styles/app.css";
 import { store } from "redux/store";
 import { Provider } from "react-redux";
 import RedScreenLoader from "@/components/RedScreenLoader";

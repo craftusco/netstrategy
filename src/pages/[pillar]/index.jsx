@@ -250,8 +250,6 @@ export default function Pillar({ data, staticData }) {
 
   const router = useRouter();
 
-  console.log('ENV', process.env.NEXT_PUBLIC_STRAPI_URL);  
-
   return (
     <>
       <Head>

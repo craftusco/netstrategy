@@ -5,7 +5,6 @@ import SubpillarComponent2 from '@/components/SubpillarComponent2';
 import JournalDetail from '@/components/JournalDetail';
 import { strapiGetDataFromQueryURL } from '@/utils/proxyUrl';
 
-console.log('process.env.NEXT_PUBLIC_STRAPI_URL', process.env.NEXT_PUBLIC_STRAPI_URL);
 
 export async function getStaticPaths() {
 	const response = await fetch(strapiGetDataFromQueryURL, {
@@ -136,7 +135,7 @@ export async function getStaticProps({ params }) {
 		urls = [
 			{
 				name: 'subpillar2',
-				url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/subpillars-2-0?filters[pillar][$eq]=${params.pillar}&filters[slug][$eq]=${params.subpillar}&populate=deep,5`,
+				url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/subpillars-2-0?filters[pillar][$eq]=${params.pillar}&filters[slug][$eq]=${params.subpillar}&populate=deep,6`,
 			},
 			{
 				name: 'page',
@@ -269,7 +268,7 @@ export default function Subpillar({ data, staticData, pageName, params }) {
 			{ text: data.page?.nome },
 		];
 
-		console.log('props', data);
+		console.log('subpilalr-data:', data);
 		//componente subpillar
 		if (
 			params.subpillar == 'agenzia-google-ads' ||
