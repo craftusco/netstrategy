@@ -1,0 +1,36 @@
+/* Fonts --- */
+@font-face {
+  font-family: "Akkordeon-Nine";
+  src: url("../../fonts/Akkordeon-Nine.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akkordeon-Six";
+  src: url("../../fonts/Akkordeon-Six.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PPNeueMontreal";
+  src: url("../../fonts/PPNeueMontreal-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NeueMontreal-Medium";
+  src: url("../../fonts/NeueMontreal-Medium.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Marker-Mark";
+  src: url("../../fonts/Marker-Mark.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Houschka Pro";
+  src: url("../../fonts/HouschkaPro-Bold.ttf") format("truetype");
+  font-display: swap;
+}

@@ -1,0 +1,56 @@
+/* intro red corner */
+.heroTitleRef *,
+.leftSideRef > *,
+.leftSideRef,
+.navRef > *,
+.playInRef {
+  opacity: 1;
+  transform: translate(0) !important;
+}
+
+.redContainer {
+  opacity: 0;
+}
+
+/* splide slider */
+.splide {
+  visibility: visible !important;
+}
+
+/* splide mobile */
+@media screen and (max-width: 600px) {
+  .splide__list {
+    flex-flow: column;
+  }
+}
+
+/* accordion content */
+.list-container .list-item-text div {
+  opacity: 1;
+  max-height: initial;
+}
+
+/* agenda button */
+.load-more--button.agenda-content {
+  display: none;
+}
+
+.titleRef {
+  opacity: 1 !important;
+}
+
+.red-container {
+  display: none !important;
+}
+
+.contatti-container {
+  display: block !important;
+}
+
+.contatti-container span, .contatti-container span, .pillref {
+  translate: none !important;
+  rotate: none !important;
+  scale: none !important;
+  transform: translate(0px, 0px) !important;
+  display: block !important;
+}

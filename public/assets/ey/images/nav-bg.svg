@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1637.2" height="60" viewBox="0 0 1637.2 60">
+  <g id="Raggruppa_1793" data-name="Raggruppa 1793" transform="translate(-143 -70.063)">
+    <rect id="Rettangolo_277" data-name="Rettangolo 277" width="1637" height="60" rx="30" transform="translate(143 70.063)" fill="#2e2e2e"/>
+    <rect id="Rettangolo_289" data-name="Rettangolo 289" width="244.2" height="60" rx="30" transform="translate(838.787 70.063)" fill="#fff" opacity="0"/>
+    <rect id="Rettangolo_290" data-name="Rettangolo 290" width="244.2" height="60" rx="30" transform="translate(1188 70.063)" fill="#fff" opacity="0"/>
+    <rect id="Rettangolo_291" data-name="Rettangolo 291" width="244.2" height="60" rx="30" transform="translate(1536 70.063)" fill="#fff" opacity="0"/>
+    <rect id="Rettangolo_288" data-name="Rettangolo 288" width="244.2" height="60" rx="30" transform="translate(490.894 70.063)" fill="#fff" opacity="0"/>
+    <g id="Raggruppa_1795" data-name="Raggruppa 1795">
+      <rect id="Rettangolo_17" data-name="Rettangolo 17" width="244.2" height="60" rx="30" transform="translate(143 70.063)" fill="#fff"/>
+      <text id="L_evento" data-name="L’evento" transform="translate(265 107.063)" fill="#fff" font-size="20" font-family="NeueMontreal-Bold, Neue Montreal" font-weight="700"><tspan x="-46" y="0">L’EVENTO</tspan></text>
+    </g>
+    <text id="PROGRAMMA" transform="translate(624.091 107.063)" fill="#fff" font-size="20" font-family="NeueMontreal-Regular, Neue Montreal"><tspan x="-63" y="0">PROGRAMMA</tspan></text>
+    <text id="LOCATION" transform="translate(960.778 107.063)" fill="#fff" font-size="20" font-family="NeueMontreal-Regular, Neue Montreal"><tspan x="-48" y="0">LOCATION</tspan></text>
+    <text id="CHI_SIAMO" data-name="CHI SIAMO" transform="translate(1310 107.063)" fill="#fff" font-size="20" font-family="NeueMontreal-Regular, Neue Montreal"><tspan x="-49" y="0">CHI SIAMO</tspan></text>
+    <text id="CONTATTI" transform="translate(1658 107.063)" fill="#fff" font-size="20" font-family="NeueMontreal-Regular, Neue Montreal"><tspan x="-46" y="0">CONTATTI</tspan></text>
+  </g>
+</svg>

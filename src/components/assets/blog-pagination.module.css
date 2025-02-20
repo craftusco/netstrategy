@@ -1,0 +1,48 @@
+.paginationContainer > ul {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  gap: 1em;
+}
+
+@media screen and (max-width: 767px) {
+  .paginationContainer > ul {
+    gap: .5em;
+  }
+}
+
+.paginationLink {
+  /* padding: 0.7rem 1.2rem; */
+  display: grid;
+  place-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  border: 1px solid;
+  color: #000;
+  transition: background 0.4s ease;
+  border-color: transparent;
+  background: transparent;
+}
+
+@media screen and (max-width: 767px) {
+  .paginationLink {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.paginationLink.active:not(button) {
+  background: #fc1333;
+  color: #fff;
+}
+
+.paginationLink:not(button):hover {
+  transition: background 0.4s ease;
+  background: #fc1333;
+  color: #fff;
+}
+
+.chevronNext {
+  rotate: 180deg;
+}

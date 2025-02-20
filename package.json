@@ -1,0 +1,42 @@
+{
+  "name": "ns-v2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "sitemap": "next-sitemap"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.9.4",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@nextui-org/pagination": "^2.0.31",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@splidejs/react-splide": "^0.7.12",
+    "@studio-freight/react-lenis": "^0.0.19",
+    "axios": "^1.4.0",
+    "compression-webpack-plugin": "^10.0.0",
+    "framer-motion": "^11.11.0",
+    "fs": "^0.0.1-security",
+    "gsap": "file:gsap-bonus.tgz",
+    "html-react-parser": "^5.1.18",
+    "moment": "^2.29.4",
+    "next": "^13.5.6",
+    "nodemailer": "^6.9.5",
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
+    "react-gtm-module": "^2.0.11",
+    "react-hook-form": "^7.43.9",
+    "react-markdown": "^8.0.7",
+    "react-redux": "^8.0.5",
+    "redux-persist": "^6.0.0",
+    "remark-gfm": "^3.0.1",
+    "sharp": "^0.32.1",
+    "sitemap": "^7.1.1",
+    "styled-components": "^5.3.10",
+    "swiper": "^9.4.1"
+  }
+}
