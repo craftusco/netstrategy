@@ -1,25 +1,12 @@
 export default function getPath(url, checkEnv = false) {
+  if (!url || url === "undefined") return "/transparent-fallback.webp";
 
+  // Definizione del dominio basata esclusivamente su variabili d'ambiente
+  const domain = checkEnv ? process.env.DOMAIN || "" : process.env.DEFAULT_DOMAIN || "https://www.netstrategy.it";
 
-  if(!url || typeof url == 'undefined' || url == 'undefined') return '/transparent-fallback.webp'
-
-  if (
-    /\.(mp4|avi|wmv|mov|flv|mkv|webm|vob|ogv|m4v|3gp|3g2|mpeg|mpg|m2v|svi|3gpp|3gpp2|mxf|roq|nsv|f4v|f4p|f4a|f4b|jpg|jpeg|png|gif|bmp|tiff|webp)$/i.test(
-      url
-    )
-  ) {
-    // url = changeFileExtension(url);
-  }
-
-  const base_url = typeof window !== "undefined" ? window.location.origin : "";
-  const localeDomain = process.env.DOMAIN ? process.env.DOMAIN : base_url;
-  /*
-  ONLY FOR LOCAL
-  const domain = '';
-  */
-  const domain = checkEnv === false ? "https://www.netstrategy.it" : localeDomain;
   return domain + url;
 }
+
 
 // //! Change file extension from jpg/png to webp
 // function changeFileExtension(filename) {
