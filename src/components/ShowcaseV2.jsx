@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Text, Box, SimpleGrid, Flex } from '@chakra-ui/react';
+import { Container, Text, Box, SimpleGrid, Flex, HStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import { HeadingDefault, LightTitle } from './styled-components';
 import getPath from '@/utils/getPath';
 import ReactMarkdown from 'react-markdown';
+import styled from 'styled-components';
 
 const ShowcaseV2 = ({ data }) => {
 	console.log('data-page:', data);
@@ -32,14 +33,22 @@ const ShowcaseV2 = ({ data }) => {
 								<Box
 									key={index}
 									my="100px"
+									maxW="1106px"
+									mx="auto"
+									position="relative"
 									px={4}>
-									<ReactMarkdown children={section.quote} />
+									<img
+										src="/quote-icon.png"
+										alt="Quote icon"
+										className='quote-icon'
+									/>
+									<ReactMarkdown children={section.quote} className="section-quote"/>
 								</Box>
 							);
 
 						case 'successi.gallery':
 							return (
-								<Flex
+								<HStack
 									key={index}
 									gap={10}>
 									{section.gallery?.map((item) => (
@@ -64,7 +73,7 @@ const ShowcaseV2 = ({ data }) => {
 											/>
 										</Box>
 									))}
-								</Flex>
+								</HStack>
 							);
 
 						default:
@@ -77,3 +86,4 @@ const ShowcaseV2 = ({ data }) => {
 };
 
 export default ShowcaseV2;
+

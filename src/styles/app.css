@@ -18,6 +18,18 @@ html.lenis {
      pointer-events: none;
   } 
 
+/* Showcase */
+.quote-icon{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.section-quote *{
+  text-align: center;
+  font-size: 35px;
+  line-height: 44px;
+}
+
 /* Timeline */
 .timeline-splide{
   .splide__slide{

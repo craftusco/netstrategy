@@ -216,15 +216,10 @@ export default function SubpillarComponent({ data, staticData, breadcrumbLinks }
     };
   }, []);
 
-  /* button default */
-  data.page.intro.bottone = {
-    // testo: `${subpillar?.pre_titolo ? subpillar.pre_titolo : staticData.hero}. Contattaci!`,
-    testo: `Contattaci`,
-    is_contact: true,
-    url: "#",
-  };
+
 
   const subpillar = data.page;
+
   const list = data.list;
   const pillarData = data.pillar_data;
   const divider = pillarData.divisore
@@ -359,11 +354,11 @@ export default function SubpillarComponent({ data, staticData, breadcrumbLinks }
         <>
           <CertDinamicImages mt={"4rem"} />
 
-          <Cards
+          {subpillar.intro && <Cards
             data={subpillar.intro.media.data}
             labels={subpillar.intro.labels}
             mt="clamp(2.5rem, calc(1.29rem + 5.18vw), 7.5rem)"
-          />
+          />}
 
           <DinamicDesktopImages mt={"4rem"} />
           {/* Index */}
@@ -376,7 +371,7 @@ export default function SubpillarComponent({ data, staticData, breadcrumbLinks }
         </>
 
         {/* Specialist */}
-        <section id="specialist">
+        {subpillar.specialist && <section id="specialist">
           <Divider words={divider} />
           <HeadingSpecialist>
             <h2>{staticData.specialist_titolo}</h2>
@@ -387,7 +382,7 @@ export default function SubpillarComponent({ data, staticData, breadcrumbLinks }
             btnIsScroll
             staticData={staticData}
           />
-        </section>
+        </section>}
         {/* Team (SOLO PER SUBPILLAR AGENZIA SEO) */}
         {
           (data.page.slug === 'agenzia-seo') &&
@@ -544,7 +539,7 @@ export default function SubpillarComponent({ data, staticData, breadcrumbLinks }
           </section>
         )}
         {/* Sezione Extra - FAQ */}
-        {(subpillar.extra != null || subpillar.extra.length > 0) && (
+        {(subpillar?.extra != null || subpillar?.extra?.length > 0) && (
           (windowWidth > 767) ?
             <section id="extra">
               <Divider words={divider} />

@@ -290,6 +290,7 @@ export default function Subpillar({ data, staticData, pageName, params }) {
 					data={data}
 					staticData={staticData}
 					breadcrumbLinks={breadcrumbLinksSubpillar}
+					subpillar={data.subpillar2}
 				/>
 			);
 		}
