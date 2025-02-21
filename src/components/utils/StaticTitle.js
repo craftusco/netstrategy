@@ -24,7 +24,7 @@ export default function StaticTitle({title, pretitle}) {
       <Pretitle>
         {pretitle}
       </Pretitle>
-      <Title isLong={title.length > 26}>
+      <Title isLong={title?.length > 26}>
         {router.pathname === '/privacy-policy-e-cookies' ? <span className='h1title' ref={titleRef}>{title}</span> : <h1 ref={titleRef}>{title}</h1>}
       </Title>
     </Text>

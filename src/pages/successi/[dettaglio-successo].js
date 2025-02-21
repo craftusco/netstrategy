@@ -41,6 +41,7 @@ import { useDispatch } from "react-redux";
 import { updateSuccessSelected } from "../../../redux/filterSuccessesSlice";
 import Head from "next/head";
 import { strapiGetDataFromQueryURL } from "@/utils/proxyUrl";
+import ShowcaseV2 from "@/components/ShowcaseV2";
 
 // 1. Insight results -- successo.valori_successo - DONE 9
 // 2. SEO results -- successo.seo_successo - DONE
@@ -136,7 +137,7 @@ export async function getStaticPaths() {
   const response = await fetch(strapiGetDataFromQueryURL, {
     method: "POST",
     body: JSON.stringify({
-      url: "https://www.netstrategy.it/api/project-details?pagination[limit]=-1&populate=deep,1&fields[0]=slug",
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/project-details?pagination[limit]=-1&populate=deep,1&fields[0]=slug`,
     }),
   });
 
@@ -160,24 +161,24 @@ export async function getStaticProps({ params }) {
   const urls = [
     {
       name: "page",
-      url: `https://www.netstrategy.it/api/project-details?populate=deep,4&filters[slug]=${params["dettaglio-successo"]}`,
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/project-details?populate=deep,4&filters[slug]=${params["dettaglio-successo"]}`,
     },
     {
       name: "list",
-      url: "https://www.netstrategy.it/api/project-details?pagination[limit]=-1&populate=deep,1&fields[0]=slug&sort[0]=createdAt%3Aasc",
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/project-details?pagination[limit]=-1&populate=deep,1&fields[0]=slug&sort[0]=createdAt%3Aasc`,
     },
     {
       name: "successi",
-      url: "https://www.netstrategy.it/api/project?populate=deep,4",
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/project?populate=deep,4`,
     },
     {
       name: "categorie",
-      url: `https://www.netstrategy.it/api/custom-categories`,
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/custom-categories`,
       transform: false,
     },
     {
       name: "projects",
-      url: `https://www.netstrategy.it/api/project-details?populate=deep,5&filters[show_slider]=true`,
+      url: `${process.env.NEXT_PUBLIC_STRAPI_URL}/project-details?populate=deep,5&filters[show_slider]=true`,
       transform: false,
     },
   ];
@@ -316,6 +317,7 @@ export default function ProjectDetail({ data, staticData, steps, nextStep }) {
         successo.printed_media.titolo)
     : null;
 
+  
   return (
     <div>
       <Head>
@@ -327,6 +329,11 @@ export default function ProjectDetail({ data, staticData, steps, nextStep }) {
       <HeroPages data={successo.thumbnail_success} staticData={staticData}>
         <StaticTitle title={successo.thumbnail_success.nome}></StaticTitle>
       </HeroPages>
+
+      {successo.is_new_layout && (
+        <ShowcaseV2 data={successo} />
+      )}
+
       <CoreBusiness>
         <p>
           <span className="title">Core Business: </span>
@@ -597,6 +604,7 @@ export default function ProjectDetail({ data, staticData, steps, nextStep }) {
           <Divider />
         </div>
       )}
+      
 
       {successo.logo_design && (
         <>

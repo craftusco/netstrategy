@@ -269,12 +269,12 @@ export default function HeroPages({
   let staticImg = getPath('/transparent-fallback.webp');
 
   let img_desktop =
-    data.immagine && data.immagine?.data
+    data?.immagine && data?.immagine?.data
       ? getPath(data?.immagine?.data?.attributes?.url)
-      : data.cover_image;
+      : data?.cover_image;
 
   let img_mobile =
-    data.immagine_mobile && data.immagine_mobile.data
+    data?.immagine_mobile && data?.immagine_mobile.data
       ? getPath(data?.immagine_mobile?.data?.attributes?.url)
       : img_desktop;
 
@@ -284,7 +284,7 @@ export default function HeroPages({
   //! COMPONENENT ---
   return (
     <Container ref={containerRef}>
-      {data.video && data.video.data ? (
+      {data?.video && data?.video.data ? (
         <VideoContainer>
           <video
             loop
@@ -300,7 +300,7 @@ export default function HeroPages({
             duration={data?.meta_duration ? data?.meta_duration : ''}
             thumbnail={data?.meta_thumbnail?.data ? getPath(data?.meta_thumbnail?.data) : ''}
           >
-            <source src={getPath(data.video.data?.attributes.url)} />
+            <source src={getPath(data?.video.data?.attributes.url)} />
           </video>
         </VideoContainer>
       ) : (
@@ -331,9 +331,9 @@ export default function HeroPages({
       <RedContainer className='redContainer' ref={redContainerRef}>
         <RedContent>
           <span className="page-name" style={{ textTransform: 'uppercase' }} ref={redSpanName}>
-            {data.nome}
+            {data?.nome}
           </span>
-          {data.video && data.video.data ? (
+          {data?.video && data?.video.data ? (
             <ImageContainer ref={redImageContainer} className="imageRef">
               <video
                 loop
@@ -345,7 +345,7 @@ export default function HeroPages({
                 alt="Video di presentazione"
                 ref={redScreenVideo}
               >
-                <source src={getPath(data.video.data?.attributes.url)} />
+                <source src={getPath(data?.video.data?.attributes.url)} />
               </video>
             </ImageContainer>
           ) : (
@@ -380,7 +380,7 @@ export default function HeroPages({
         </LeftSide>
       </Header>
       {/* <RightSide logo={logo} className="leftSideRef">
-        {data.spanHeader}
+        {data?.spanHeader}
       </RightSide> */}
       <LittleTittle className="leftSideRef">{staticData.hero_intestazione}</LittleTittle>
       {/* Content */}
@@ -388,7 +388,7 @@ export default function HeroPages({
         {/* content */}
         <Content page={page}>
           <ContentChildren className="heroTitleRef">{children}</ContentChildren>
-          {data.video?.data && !router.pathname.includes('nettalk') && (
+          {data?.video?.data && !router.pathname.includes('nettalk') && (
             <VideoControls>
               <div className="restartIcon" onClick={restartVideo}>
                 <RestartVideoIcon isAbsolute={false} />
