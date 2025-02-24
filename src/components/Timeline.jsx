@@ -4,29 +4,20 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Image from 'next/image';
 import { HeadingDefault, LightTitle } from './styled-components';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const Timeline = ({ data }) => {
 	const [progress, setProgress] = useState(0);
 	const splideRef = useRef(null);
-	const [slidesPerView, setSlidesPerView] = useState(3.5);
+	const [slidesPerView, setSlidesPerView] = useState(3);
 	const [isSticky, setIsSticky] = useState(false);
-
+	const timelineRef = useRef(null);
 	const numberOfSlides = data?.steps.length;
 
-	// Handle sticky scroll
-	const handleScroll = () => {
-		const scrollY = window.scrollY;
-		if (scrollY > 100) { // Threshold per sticky
-			setIsSticky(true);
-		} else {
-			setIsSticky(false);
-		}
-	};
-
-	// Adjust slides per view on resize
 	const handleResize = () => {
 		const windowWidth = window.innerWidth;
-		if (windowWidth <= 768) { // Mobile breakpoint
+		if (windowWidth <= 768) {
 			setSlidesPerView(1);
 		} else {
 			setSlidesPerView(3.5);
@@ -34,23 +25,42 @@ const Timeline = ({ data }) => {
 	};
 
 	useEffect(() => {
-		// Initial resize
+		gsap.registerPlugin(ScrollTrigger);
 		handleResize();
 
-		// Listen to scroll and resize events
-		window.addEventListener('scroll', handleScroll);
+		const stickyElement = timelineRef.current;
+		ScrollTrigger.create({
+			trigger: stickyElement,
+			start: 'top top',
+			end: '+=200',
+			pin: true,
+			pinSpacing: false,
+			markers: false,
+			onEnter: () => setIsSticky(true),
+			onLeave: () => setIsSticky(false),
+			onEnterBack: () => setIsSticky(true),
+			onLeaveBack: () => setIsSticky(false),
+		});
+
 		window.addEventListener('resize', handleResize);
 
-		// Cleanup event listeners on unmount
 		return () => {
-			window.removeEventListener('scroll', handleScroll);
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
 
+	const handleSlideMove = (splide) => {
+		const slidesPerPage = slidesPerView;
+		const totalSlides = splide.length;
+		const slideProgress = (splide.index / (totalSlides - slidesPerPage)) * 100;
+		setProgress(slideProgress);
+	};
+
 	if (!data || !Array.isArray(data.steps)) {
 		return (
-			<Text textAlign="center" color="gray.500">
+			<Text
+				textAlign="center"
+				color="gray.500">
 				Nessun evento disponibile
 			</Text>
 		);
@@ -58,16 +68,18 @@ const Timeline = ({ data }) => {
 
 	return (
 		<Container
-			maxW="120rem"
+			w="100%"
+			ml="auto"
 			py="50px"
-			m="auto"
+			bg="white"
+			zIndex={1000}
 			textAlign="center"
-			position={isSticky ? 'sticky' : 'static'}
-			top="0"
-			zIndex={10} // Assicurati che il contenuto sticky sia sopra
-			marginBottom="60px"> {/* Padding per evitare sovrapposizione */}
+			marginBottom="60px"
+			overflow="hidden">
 			{data?.pretitle && (
-				<LightTitle textAlign="center" marginBottom="20px">
+				<LightTitle
+					textAlign="center"
+					marginBottom="20px">
 					{data?.pretitle}
 				</LightTitle>
 			)}
@@ -81,42 +93,39 @@ const Timeline = ({ data }) => {
 				</HeadingDefault>
 			)}
 
-			<Box position="relative">
+			<Box
+				position="relative"
+				ref={timelineRef}>
 				<Splide
 					className="timeline-splide"
 					ref={splideRef}
 					options={{
 						type: 'loop',
+						drag: 'free',
+						autoScroll: {
+							speed: 1,
+						},
 						loop: true,
 						isNavigation: true,
-						pauseOnHover: true,
+						pauseOnHover: false,
 						slideFocus: true,
-						perPage: slidesPerView, // Dynamic slides per view
+						perMove: 1,
+						focus: 'center',
+						perPage: slidesPerView,
 						rewind: true,
 						autoplay: true,
-						perMove: 1,
 						pagination: false,
 						arrows: false,
 					}}
-					onMoved={(splide) => {
-						const progressValue = (splide.index / (splide.length - 1)) * 100;
-						setProgress(progressValue);
-					}}>
+					onMoved={handleSlideMove}
+				>
 					{data?.steps.map((step, i) => (
-						<SplideSlide
-							key={i}
-							style={{
-								textAlign: 'left',
-								maxWidth: '390px',
-								display: 'flex',
-								flexDirection: 'column',
-							}}>
+						<SplideSlide key={i}>
 							<Box
 								maxW="350px"
 								display="flex"
 								flexDirection="column"
 								height="100%">
-								{/* Titolo */}
 								<Heading
 									maxW="267px"
 									fontSize="30px"
@@ -130,7 +139,6 @@ const Timeline = ({ data }) => {
 									{step?.title}
 								</Heading>
 
-								{/* Immagine */}
 								<AspectRatio
 									maxW="350px"
 									h="179px"
@@ -148,7 +156,6 @@ const Timeline = ({ data }) => {
 										alt={step?.title}
 									/>
 								</AspectRatio>
-								{/* Contenuto */}
 								<Text
 									color="#000"
 									fontSize="20px"
@@ -161,8 +168,10 @@ const Timeline = ({ data }) => {
 					))}
 				</Splide>
 
-				<Box py="20px" id="progress-area" position="relative">
-					{/* Barra di progresso personalizzata */}
+				<Box
+					py="20px"
+					id="progress-area"
+					position="relative">
 					<div className="progress-wrapper">
 						<div
 							className="progress-bar"
@@ -170,13 +179,12 @@ const Timeline = ({ data }) => {
 						/>
 					</div>
 
-					{/* Dots */}
 					<div className="dots-container">
-						{Array.from({ length: numberOfSlides }).map((_, index) => (
+						{Array.from({ length: Math.ceil(numberOfSlides / slidesPerView) }).map((_, index) => (
 							<div
 								key={index}
 								className={`dot ${
-									index <= (progress / 100) * (numberOfSlides - 1)
+									index <= (progress / 100) * (Math.ceil(numberOfSlides / slidesPerView) - 1)
 										? 'active'
 										: ''
 								}`}
