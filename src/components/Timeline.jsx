@@ -1,165 +1,89 @@
-import React, { useState, useRef } from 'react';
-import {
-	Heading,
-	Container,
-	Text,
-	AspectRatio,
-	Box,
-} from '@chakra-ui/react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
-import Image from 'next/image';
-import { HeadingDefault, LightTitle } from './styled-components';
+import React, { useState, useEffect, useRef } from "react";
+import { Heading, Container, Text, AspectRatio, Box, Flex } from "@chakra-ui/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { HeadingDefault, LightTitle } from "./styled-components";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Timeline = ({ data }) => {
-	const [progress, setProgress] = useState(0);
-	const splideRef = useRef(null);
-	const numberOfSlides = data?.steps.length;
+  const timelineRef = useRef(null);
+  const progressRef = useRef(null);
+  const [progress, setProgress] = useState(0);
 
-	console.log('progress', progress);
+  useEffect(() => {
+    const timeline = timelineRef.current;
+    const progressBar = progressRef.current;
+    const sections = gsap.utils.toArray(".timeline-item");
 
-	if (!data || !Array.isArray(data.steps)) {
-		return (
-			<Text
-				textAlign="center"
-				color="gray.500">
-				Nessun evento disponibile
-			</Text>
-		);
-	}
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: timeline,
+        pin: true,
+        scrub: 1,
+        snap: 1 / (sections.length - 1),
+        start: "top top",
+        end: () => `+=${timeline.offsetWidth}`,
+        onUpdate: (self) => {
+          setProgress(self.progress * 100);
+          progressBar.style.width = `${self.progress * 100}%`;
+        },
+      },
+    });
+  }, []);
 
-	return (
-		<Container
-			maxW="120rem"
-			py="50px"
-			m="auto"
-			//mr="0"
-			textAlign="center">
-			{data?.pretitle && (
-				<LightTitle
-					textAlign="center"
-					marginBottom="20px">
-					{data?.pretitle}
-				</LightTitle>
-			)}
-			{data?.title && (
-				<HeadingDefault
-					red
-					textAlign="center"
-					marginBottom="90px"
-					mobile="margin-bottom: 50px;">
-					{data?.title}
-				</HeadingDefault>
-			)}
+  if (!data || !Array.isArray(data.steps)) {
+    return <Text textAlign="center" color="gray.500">Nessun evento disponibile</Text>;
+  }
 
-			<Box position="relative">
-			<Splide
-        className='timeline-splide'
-				ref={splideRef}
-				options={{
-					type: 'loop',
-					loop: true,
-          isNavigation: true,
-          pauseOnHover: true,
-          slideFocus: true,
-          perPage: 3.5,
-					rewind: true,
-					autoplay: 'true',
-					perPage: 1,
-					perMove: 1,
-					pagination: false,
-					arrows: false,
-				}}
-				onMoved={(splide) => {
-					const progressValue = (splide.index / (splide.length - 1)) * 100;
-					setProgress(progressValue);
-				}}>
-				{data?.steps.map((step, i) => (
-					<SplideSlide
-						key={i}
-						style={{
-							textAlign: 'left',
-							maxWidth: '390px',
-							display: 'flex',
-							flexDirection: 'column',
-						}}>
-						<Box
-							maxW="350px"
-							display="flex"
-							flexDirection="column"
-							height="100%">
-							{/* Titolo */}
-							<Heading
-								maxW="267px"
-								fontSize="30px"
-								fontWeight="700"
-								textAlign="left"
-								color="#FC1333"
-								mb="30px"
-								minH="80px"
-								display="flex"
-								alignItems="center">
-								{step?.title}
-							</Heading>
+  return (
+    <Container maxW="120rem" py="50px" textAlign="center">
+      {/* Titoli */}
+      {data?.pretitle && <LightTitle textAlign="center" marginBottom="20px">{data.pretitle}</LightTitle>}
+      {data?.title && <HeadingDefault red textAlign="center" marginBottom="90px" mobile="margin-bottom: 50px;">{data.title}</HeadingDefault>}
 
-							{/* Immagine */}
-							<AspectRatio
-								maxW="350px"
-								h="179px"
-								borderRadius="10px"
-								mb="30px">
-								<Image
-									src={
-										step?.image?.data
-											? `https://www.netstrategy.it${step?.image?.data.attributes?.url}`
-											: '/placeholder.svg'
-									}
-									width={350}
-									height={179}
-									style={{ borderRadius: '10px' }}
-									alt={step?.title}
-								/>
-							</AspectRatio>
-							{/* Contenuto */}
-							<Text
-								color="#000"
-								fontSize="20px"
-								letterSpacing="0.4px"
-								flex="1">
-								{step?.content}
-							</Text>
-						</Box>
-					</SplideSlide>
-				))}
-			</Splide>
+      {/* Timeline Scroll */}
+      <Flex ref={timelineRef} gap="50px" overflow="hidden" className="timeline-wrapper">
+        {data?.steps.map((step, i) => (
+          <Box key={i} className="timeline-item" w="380px" display="flex" flexDirection="column" height="100%">
+            {/* Titolo */}
+            <Heading fontSize="30px" fontWeight="700" textAlign="left" color="#FC1333" mb="30px" minH="80px" display="flex" alignItems="center">
+              {step?.title}
+            </Heading>
 
-			<Box
-				py="20px"
-        id="progress-area"
-				position="relative">
-				{/* Barra di progresso personalizzata */}
-				<div className="progress-wrapper">
-					<div
-						className="progress-bar"
-						style={{ width: `${progress}%` }}
-					/>
-				</div>
+            {/* Immagine */}
+            <AspectRatio maxW="350px" h="179px" borderRadius="10px" mb="30px">
+              <Image
+                src={step?.image?.data ? `https://www.netstrategy.it${step.image.data.attributes?.url}` : "/placeholder.svg"}
+                width={350}
+                height={179}
+                style={{ borderRadius: "10px" }}
+                alt={step?.title}
+              />
+            </AspectRatio>
 
-				{/* Dots */}
-				<div className="dots-container">
-					{Array.from({ length: numberOfSlides }).map((_, index) => (
-						<div
-							key={index}
-							className={`dot ${
-								index <= (progress / 100) * (numberOfSlides - 1) ? 'active' : ''
-							}`}
-						/>
-					))}
-				</div>
-			</Box>
-			</Box>
-		</Container>
-	);
+            {/* Contenuto */}
+            <Text color="#000" fontSize="20px" letterSpacing="0.4px" flex="1">{step?.content}</Text>
+          </Box>
+        ))}
+      </Flex>
+
+      {/* Progress Bar */}
+      <Box position="relative" width="100%" height="10px" bg="gray.200" mt={6} className="progress-wrapper">
+        <Box ref={progressRef} height="100%" width="0%" bg="red.500" className="progress-bar" />
+      </Box>
+
+      {/* Dots Indicator */}
+      <Flex justifyContent="center" mt={4} className="dots-container">
+        {Array.from({ length: data.steps.length }).map((_, index) => (
+          <Box key={index} className={`dot ${index <= (progress / 100) * (data.steps.length - 1) ? "active" : ""}`} />
+        ))}
+      </Flex>
+    </Container>
+  );
 };
 
 export default Timeline;
