@@ -160,7 +160,7 @@ const Timeline = ({ data }) => {
 									color="#000"
 									fontSize="20px"
 									letterSpacing="0.4px"
-									flex="1">
+									textAlign="left">
 									{step?.content}
 								</Text>
 							</Box>
@@ -179,7 +179,7 @@ const Timeline = ({ data }) => {
 						/>
 					</div>
 
-					<div className="dots-container">
+					{/* <div className="dots-container">
 						{Array.from({ length: Math.ceil(numberOfSlides / slidesPerView) }).map((_, index) => (
 							<div
 								key={index}
@@ -190,7 +190,7 @@ const Timeline = ({ data }) => {
 								}`}
 							/>
 						))}
-					</div>
+					</div> */}
 				</Box>
 			</Box>
 		</Container>
