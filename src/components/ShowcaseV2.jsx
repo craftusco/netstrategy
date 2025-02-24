@@ -7,7 +7,6 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 const ShowcaseV2 = ({ data }) => {
-	console.log('data-page:', data);
 
 	return (
 		<Container

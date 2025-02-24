@@ -268,7 +268,7 @@ export default function Subpillar({ data, staticData, pageName, params }) {
 			{ text: data.page?.nome },
 		];
 
-		console.log('subpilalr-data:', data);
+		//console.log('subpilalr-data:', data);
 		//componente subpillar
 		if (
 			params.subpillar == 'agenzia-google-ads' ||
