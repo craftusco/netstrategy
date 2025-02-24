@@ -70,7 +70,8 @@ const Timeline = ({ data }) => {
 		<Container
 			w="100%"
 			ml="auto"
-			py="50px"
+			pt="50px"
+			pb="100px"
 			bg="white"
 			zIndex={1000}
 			textAlign="center"
@@ -143,7 +144,7 @@ const Timeline = ({ data }) => {
 									maxW="350px"
 									h="179px"
 									borderRadius="10px"
-									mb="30px">
+									mb="50px">
 									<Image
 										src={
 											step?.image?.data

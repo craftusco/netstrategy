@@ -1,5 +1,5 @@
 export default function getPath(url, checkEnv = false) {
-  if (!url || url === "undefined") return "/transparent-fallback.webp";
+  if (!url || url === "undefined") return "/placeholder.svg";
 
   // Definizione del dominio basata esclusivamente su variabili d'ambiente
   const domain = checkEnv ? process.env.DOMAIN || "" : process.env.DEFAULT_DOMAIN || "https://www.netstrategy.it";

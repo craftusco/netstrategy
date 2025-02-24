@@ -19,10 +19,18 @@ html.lenis {
   } 
 
 /* Showcase */
+.showcasev2-description *{
+  font-size: 26px;
+  line-height: 34px;
+}
 .quote-icon{
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
+  width: 50px;
+  display: block;
+  height: auto;
+
 }
 .section-quote *{
   text-align: center;
@@ -43,7 +51,7 @@ html.lenis {
 }
 /* #progress-area{
   position: absolute;
-  top: 50%;
+  top: 58%;
   width: 100%;
 } */
 .progress-wrapper {

@@ -381,19 +381,19 @@ export default function ProjectDetail({ data, staticData, steps, nextStep }) {
         </>
       )}
 
-      {!["ecommerce", "seo"].includes(
-        successo.categorie.data[0].attributes.nome.toLowerCase()
-      ) &&
-        successo.slug != "aworld" && (
-          <>
-            <Divider />
-            <StepsLinks
-              sottotitolo={successo.project_description}
-              steps={steps}
-              mt="clamp(2.5rem, calc(1.29rem + 5.18vw), 7.5rem)"
-            />
-          </>
-        )}
+    {!["ecommerce", "seo"].includes(
+      successo.categorie.data[0].attributes.nome.toLowerCase()
+    ) &&
+      successo.slug !== "aworld" && successo.is_new_layout === false && (
+        <>
+          <Divider />
+          <StepsLinks
+            sottotitolo={successo.project_description}
+            steps={steps}
+            mt="clamp(2.5rem, calc(1.29rem + 5.18vw), 7.5rem)"
+          />
+        </>
+      )}
 
       {/* valori di successo (insight) */}
       {successo.valori_successo && successo.valori_successo.length > 0 && (
