@@ -13,7 +13,7 @@ const Timeline = ({ data }) => {
 	const [slidesPerView, setSlidesPerView] = useState(3);
 	const [isSticky, setIsSticky] = useState(false);
 	const timelineRef = useRef(null);
-	const numberOfSlides = data?.steps.length;
+	const numberOfSlides = data?.steps?.length || [];
 
 	const handleResize = () => {
 		const windowWidth = window.innerWidth;
